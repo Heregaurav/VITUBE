@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -6,13 +7,25 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 app.use(
-
     cors({
-        origin: process.env.CORS_ORIGIN,
+        origin: function(origin, callback) {
+            if (!origin) return callback(null, true)
+            
+            const allowedOrigins = process.env.CORS_ORIGIN
+                ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
+                : []
+
+            if (
+                allowedOrigins.includes(origin) ||
+                origin.endsWith('.vercel.app')
+            ) {
+                callback(null, true)
+            } else {
+                callback(new Error('Not allowed by CORS'))
+            }
+        },
         credentials: true
     })
-
-
 )
 // common middleware
 app.use(express.json({ limit: "16kb" }));
