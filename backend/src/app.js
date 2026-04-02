@@ -27,6 +27,12 @@ app.use(
         credentials: true
     })
 )
+app.use((err, req, res, next) => {
+    console.error("ERROR:", err.message, err.stack)
+    res.status(err.statusCode || 500).json({
+        message: err.message || "Internal Server Error"
+    })
+})
 // common middleware
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));// Parses HTML form data
