@@ -9,7 +9,7 @@ import { verifyJWT } from "../middlewares/auth.middlewares.js";
 const router = Router();
 
 // All subscription routes require authentication
-router.use(verifyJWT);
+
 
 // ─────────────────────────────────────────────
 // /api/v1/subscriptions
