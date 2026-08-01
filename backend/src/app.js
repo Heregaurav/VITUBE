@@ -8,26 +8,30 @@ const app = express();
 const frontendDistPath = path.resolve(process.cwd(), "../frontend/dist");
 const frontendIndexPath = path.join(frontendDistPath, "index.html");
 
+const allowedOrigins = (process.env.CORS_ORIGIN || "")
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+const isAllowedOrigin = (origin) => {
+    if (!origin) return true;
+
+    return (
+        allowedOrigins.includes(origin) ||
+        origin.endsWith('.vercel.app') ||
+        origin.includes('localhost') ||
+        origin.includes('127.0.0.1')
+    );
+};
+
 app.use(
     cors({
         origin: function(origin, callback) {
-            if (!origin) return callback(null, true);
-
-            const allowedOrigins = process.env.CORS_ORIGIN
-                ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
-                : [];
-
-            const isAllowed =
-                allowedOrigins.includes(origin) ||
-                origin.endsWith('.vercel.app') ||
-                origin.includes('localhost') ||
-                origin.includes('127.0.0.1');
-
-            if (isAllowed) {
-                callback(null, true);
-            } else {
-                callback(null, true);
+            if (isAllowedOrigin(origin)) {
+                return callback(null, true);
             }
+
+            return callback(new Error("Origin not allowed by CORS"));
         },
         credentials: true,
         methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],

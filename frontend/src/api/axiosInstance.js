@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
 });
 
 // URLs where we should NOT attempt refresh or redirect on 401
-const AUTH_URLS = ["/users/current-user", "/users/refresh-token", "/users/login", "/users/register"];
+const AUTH_URLS = ["/users/refresh-token", "/users/login", "/users/register"];
 
 // Response interceptor — handles token refresh automatically
 axiosInstance.interceptors.response.use(
