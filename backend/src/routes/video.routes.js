@@ -21,8 +21,7 @@ const router = Router();
 
 router.route("/")
     .get(getAllVideos)       // GET  /videos?page=1&limit=10&query=&sortBy=&sortType=&userId=
-    .post(
-        upload.fields([     // POST /videos  — publish a new video
+    .post(        verifyJWT,        upload.fields([     // POST /videos  — publish a new video
             {
                 name: "videoFile",
                 maxCount: 1
@@ -42,16 +41,17 @@ router.route("/")
 router.route("/:videoId")
     .get(getVideoById)      // GET    /videos/:videoId
     .patch(
+        verifyJWT,
         upload.single("thumbnail"),  // PATCH  /videos/:videoId — update title, description, thumbnail
         updateVideo
     )
-    .delete(deleteVideo);   // DELETE /videos/:videoId
+    .delete(verifyJWT, deleteVideo);   // DELETE /videos/:videoId
 
 // ─────────────────────────────────────────────
 // /api/v1/videos/toggle/publish/:videoId
 // ─────────────────────────────────────────────
 
 router.route("/toggle/publish/:videoId")
-    .patch(togglePublishStatus); // PATCH /videos/toggle/publish/:videoId
+    .patch(verifyJWT, togglePublishStatus); // PATCH /videos/toggle/publish/:videoId
 
 export default router;

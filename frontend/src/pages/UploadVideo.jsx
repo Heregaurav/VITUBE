@@ -74,8 +74,8 @@ function UploadVideo() {
               <label className="flex flex-col items-center justify-center w-full h-64 bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl cursor-pointer hover:border-blue-400 hover:bg-blue-50/30 transition-all group">
                 <Upload size={48} className="text-slate-300 group-hover:text-blue-400 transition-colors mb-4" />
                 <p className="text-slate-400 font-bold text-sm">Click to select video file</p>
-                <p className="text-slate-300 text-xs mt-1">MP4, WebM, MOV supported</p>
-                <input type="file" accept="video/*" onChange={handleVideoChange} className="hidden" />
+                <p className="text-slate-300 text-xs mt-1">MP4, MOV, MKV, WebM with H.264/H.265 support</p>
+                <input type="file" accept="video/mp4,video/x-m4v,video/quicktime,video/x-matroska,video/webm,.mp4,.mov,.mkv,.webm" onChange={handleVideoChange} className="hidden" />
               </label>
             ) : (
               <div className="relative">

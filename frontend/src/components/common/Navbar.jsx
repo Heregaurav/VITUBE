@@ -5,6 +5,8 @@ import { logout } from "../../app/slices/authSlice";
 import { toggleSidebar, toggleDarkMode } from "../../app/slices/uiSlice";
 import { Search, Menu, LogOut, Upload, Settings, Moon, Sun } from "lucide-react";
 import toast from "react-hot-toast";
+import { Play } from "lucide-react";
+
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -31,9 +33,19 @@ function Navbar() {
         <button onClick={() => dispatch(toggleSidebar())} className="text-slate-600 hover:text-blue-600 transition-colors">
           <Menu size={22} />
         </button>
-        <Link to="/" className="text-blue-600 font-bold text-xl tracking-tight">
-          Vid<span className="text-slate-900">Tube</span>
-        </Link>
+            <Link
+              to="/"
+              className="flex items-center gap-2 text-2xl font-bold"
+            >
+              <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-500">
+                <Play className="h-3 w-3 fill-white text-white" />
+              </div>
+
+              <span>
+                <span className="text-blue-600">Pla</span>
+                <span className="text-slate-900">vio</span>
+              </span>
+            </Link>
       </div>
 
       {/* Search */}

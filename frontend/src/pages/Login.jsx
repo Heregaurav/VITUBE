@@ -27,7 +27,7 @@ function Login() {
     <div className="min-h-screen flex items-center justify-center bg-slate-50">
       <div className="w-full max-w-md bg-white rounded-3xl p-10 shadow-2xl shadow-blue-900/5 mt-[-10vh]">
         <h1 className="text-3xl font-black text-slate-900 mb-1 tracking-tighter">Sign In</h1>
-        <p className="text-slate-500 text-sm mb-10 font-medium">Continue your journey with VidTube</p>
+        <p className="text-slate-500 text-sm mb-10 font-medium">Continue your journey with Plavio</p>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-1">
              <label className="text-xs font-bold text-slate-400 px-1 uppercase tracking-widest">Email Address</label>

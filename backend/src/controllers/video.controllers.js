@@ -115,6 +115,10 @@ const getAllVideos = asyncHandler(async (req, res) => {
 const publishAVideo = asyncHandler(async (req, res) => {
     const { title, description } = req.body;
 
+    if (!req.user?._id) {
+        throw new ApiError(401, "Unauthorized");
+    }
+
     if (!title?.trim() || !description?.trim()) {
         throw new ApiError(400, "Title and description are required!");
     }
@@ -274,10 +278,12 @@ const getVideoById = asyncHandler(async (req, res) => {
         $inc: { views: 1 }
     });
 
-    // Add to the user's watch history (addToSet avoids duplicates)
-    await User.findByIdAndUpdate(req.user._id, {
-        $addToSet: { watchHistory: videoId } // addToSet only adds the item if it already does not exist.
-    });
+    // Add to the user's watch history only when the request is authenticated.
+    if (req.user?._id) {
+        await User.findByIdAndUpdate(req.user._id, {
+            $addToSet: { watchHistory: videoId } // addToSet only adds the item if it already does not exist.
+        });
+    }
 
     return res
         .status(200)

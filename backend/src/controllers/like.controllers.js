@@ -28,6 +28,10 @@ const toggleLike = async (filterQuery) => {
 const toggleVideoLike = asyncHandler(async (req, res) => {
     const { videoId } = req.params;
 
+    if (!req.user?._id) {
+        throw new ApiError(401, "Unauthorized");
+    }
+
     if (!isValidObjectId(videoId)) {
         throw new ApiError(400, "Invalid videoId!");
     }

@@ -3,9 +3,11 @@ import { User } from "../models/user.models.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
-export const verifyJWT = asyncHandler(async (req, __dirname, next) => {
-    const token = req.cookies.accessToken || req.header
-        ("Authorization")?.replace("Bearer ", "");// there is one unit space after 'Bearer' making it 'Bearer '.
+export const verifyJWT = asyncHandler(async (req, res, next) => {
+    const token = req.cookies?.accessToken
+        || req.get("Authorization")?.replace("Bearer ", "")
+        || req.headers?.authorization?.replace("Bearer ", "");
+
     if (!token) {
         throw new ApiError(401, "unauthorized");
     }

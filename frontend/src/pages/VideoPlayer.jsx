@@ -16,7 +16,7 @@ function VideoPlayer() {
   const { videoId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { currentVideo, loading } = useSelector((state) => state.video);
+  const { currentVideo, loading, error } = useSelector((state) => state.video);
   const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   const [liked, setLiked] = useState(false);
@@ -49,6 +49,7 @@ function VideoPlayer() {
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [isSeeking, setIsSeeking] = useState(false);
   const [showPlayPulse, setShowPlayPulse] = useState(false);
+  const [videoError, setVideoError] = useState(null);
   
   const fetchedVideoRef = useRef(null);
 
@@ -62,6 +63,7 @@ function VideoPlayer() {
 
   useEffect(() => {
     if (currentVideo) {
+      setVideoError(null);
       setLiked(currentVideo.isLiked || false);
       setLikesCount(currentVideo.likesCount || 0);
       setSubscribed(currentVideo.owner?.isSubscribed || false);
@@ -104,7 +106,7 @@ function VideoPlayer() {
     const shareUrl = window.location.href;
     const shareData = {
       title: currentVideo?.title || "Check out this video",
-      text: `Watch "${currentVideo?.title}" on VidTube`,
+      text: `Watch "${currentVideo?.title}" on Plavio`,
       url: shareUrl,
     };
     try {
@@ -366,7 +368,20 @@ function VideoPlayer() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [togglePlay, skip, toggleMute, toggleFullscreen]);
 
-  if (loading || !currentVideo) return <Spinner />;
+  if (loading) return <Spinner />;
+
+  if (!currentVideo) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-6">
+        <div className="text-center max-w-md">
+          <h2 className="text-2xl font-bold text-slate-900">Video unavailable</h2>
+          <p className="mt-2 text-sm text-slate-500">
+            {error || "The video could not be loaded right now. Please try again."}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const isOwner = user?._id === currentVideo.owner?._id;
 
@@ -889,17 +904,39 @@ function VideoPlayer() {
             onMouseMove={showControlsTemporarily}
             onMouseLeave={() => { if (isPlaying) { clearTimeout(controlsTimer.current); setShowControls(false); } }}
           >
-            <video
-              ref={videoRef}
-              src={currentVideo.videoFile}
-              autoPlay
-              playsInline
-              onClick={handleVideoClick}
-              onTimeUpdate={handleTimeUpdate}
-              onPlay={() => { setIsPlaying(true); showControlsTemporarily(); }}
-              onPause={() => { setIsPlaying(false); setShowControls(true); }}
-              onLoadedMetadata={() => setDuration(videoRef.current?.duration || 0)}
-            />
+            {!currentVideo.videoFile ? (
+              <div className="w-full h-full flex items-center justify-center bg-black text-white">
+                <div className="text-center px-6">
+                  <p className="text-lg font-semibold">Video unavailable</p>
+                  <p className="text-sm text-slate-300 mt-2">This video does not have a playable source.</p>
+                </div>
+              </div>
+            ) : (
+              <video
+                ref={videoRef}
+                src={currentVideo.videoFile}
+                autoPlay
+                playsInline
+                onClick={handleVideoClick}
+                onTimeUpdate={handleTimeUpdate}
+                onPlay={() => { setIsPlaying(true); showControlsTemporarily(); }}
+                onPause={() => { setIsPlaying(false); setShowControls(true); }}
+                onLoadedMetadata={() => setDuration(videoRef.current?.duration || 0)}
+                onError={(e) => {
+                  const errorMessage = e?.target?.error?.message || "The video could not be loaded. This browser may not support the selected codec.";
+                  setVideoError(errorMessage);
+                }}
+              />
+            )}
+
+            {videoError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/80 text-white z-10">
+                <div className="text-center px-6">
+                  <p className="text-lg font-semibold">Unable to play this video</p>
+                  <p className="text-sm text-slate-300 mt-2">{videoError}</p>
+                </div>
+              </div>
+            )}
 
             {/* Gradient overlays */}
             <div className="hs-vp-gradient-top" />

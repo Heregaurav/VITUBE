@@ -16,10 +16,10 @@ const router = Router();
 // /api/v1/likes
 // ─────────────────────────────────────────────
 
-router.route("/toggle/v/:videoId").post(toggleVideoLike);       // POST /likes/toggle/v/:videoId
-router.route("/toggle/c/:commentId").post(toggleCommentLike);   // POST /likes/toggle/c/:commentId
-router.route("/toggle/t/:tweetId").post(toggleTweetLike);       // POST /likes/toggle/t/:tweetId
+router.route("/toggle/v/:videoId").post(verifyJWT, toggleVideoLike);       // POST /likes/toggle/v/:videoId
+router.route("/toggle/c/:commentId").post(verifyJWT, toggleCommentLike);   // POST /likes/toggle/c/:commentId
+router.route("/toggle/t/:tweetId").post(verifyJWT, toggleTweetLike);       // POST /likes/toggle/t/:tweetId
 
-router.route("/videos").get(getLikedVideos);                    // GET  /likes/videos
+router.route("/videos").get(verifyJWT, getLikedVideos);                    // GET  /likes/videos
 
 export default router;

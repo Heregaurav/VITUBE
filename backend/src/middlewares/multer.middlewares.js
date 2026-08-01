@@ -32,5 +32,9 @@ const upload = multer({ storage: storage }) */
 // The first code is more dangerous because there if two users upload files with same name then one of the files will get over written
 
 export const upload = multer({
-  storage
+  storage,
+  limits: {
+    fileSize: 200 * 1024 * 1024, // 200MB per file
+    files: 2
+  }
 })
