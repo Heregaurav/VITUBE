@@ -1,5 +1,5 @@
 
-#  YOUR_PROJECT_NAME
+#  VITUBE
 
 A full-stack **Video Streaming Platform** built as a course project that replicates the core functionality of modern video streaming services like YouTube. The platform allows users to upload, stream, discover, and interact with videos through an intuitive and responsive interface.
 
@@ -115,7 +115,7 @@ The goal of this project was to gain hands-on experience in building scalable fu
 * Cloudinary / Local Storage
 
 ---
-# 🎯 Learning Outcomes
+#  Learning Outcomes
 
 During this project, I gained practical experience in:
 
@@ -134,7 +134,7 @@ During this project, I gained practical experience in:
 
 ---
 
-# 🔮 Future Improvements
+# Future Improvements
 
 * Live Streaming
 * Real-time Chat
@@ -152,4 +152,4 @@ During this project, I gained practical experience in:
 
 ---
 
-## ⭐ If you like this project, consider giving it a star!
+##  If you like this project, consider giving it a star!
