@@ -13,9 +13,9 @@ The goal of this project was to gain hands-on experience in building scalable fu
 
 ---
 
-## ✨ Features
+##  Features
 
-### 👤 User Authentication
+###  User Authentication
 
 * User Registration
 * Secure Login & Logout
@@ -23,7 +23,7 @@ The goal of this project was to gain hands-on experience in building scalable fu
 * Password Encryption
 * Protected Routes
 
-### 🎥 Video Management
+### Video Management
 
 * Upload Videos
 * Stream Videos
@@ -34,7 +34,7 @@ The goal of this project was to gain hands-on experience in building scalable fu
 * Video Categories
 * View Count Tracking
 
-### 🔍 Search & Discovery
+### Search & Discovery
 
 * Search Videos
 * Filter Videos
@@ -42,7 +42,7 @@ The goal of this project was to gain hands-on experience in building scalable fu
 * Latest Uploads
 * Category-wise Browsing
 
-### ❤️ User Interaction
+### User Interaction
 
 * Like Videos
 * Dislike Videos
@@ -50,7 +50,7 @@ The goal of this project was to gain hands-on experience in building scalable fu
 * Reply to Comments *(if implemented)*
 * Subscribe/Unsubscribe Channels
 
-### 📂 Playlist Features
+###  Playlist Features
 
 * Create Playlist
 * Add Videos to Playlist
@@ -58,21 +58,21 @@ The goal of this project was to gain hands-on experience in building scalable fu
 * Delete Playlist
 * Public/Private Playlists *(if implemented)*
 
-### 📺 Channel Features
+###  Channel Features
 
 * User Channels
 * Channel Information
 * Uploaded Videos
 * Subscriber Count
 
-### 📱 Responsive UI
+### Responsive UI
 
 * Mobile Friendly
 * Tablet Support
 * Desktop Layout
 * Smooth Navigation
 
-### ⚙️ Additional Features
+### Additional Features
 
 * Video Recommendations
 * Watch History *(if implemented)*
@@ -84,7 +84,7 @@ The goal of this project was to gain hands-on experience in building scalable fu
 
 ---
 
-# 🛠️ Tech Stack
+# Tech Stack
 
 ### Frontend
 
@@ -112,136 +112,9 @@ The goal of this project was to gain hands-on experience in building scalable fu
 
 ### File Storage
 
-* Cloudinary / Local Storage *(replace accordingly)*
-
-### Other Tools
-
-* Git
-* GitHub
-* Postman
+* Cloudinary / Local Storage
 
 ---
-
-# 📂 Project Structure
-
-```text
-Video-Streaming-Platform/
-│
-├── client/
-│   ├── src/
-│   ├── public/
-│   └── package.json
-│
-├── server/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   ├── config/
-│   └── package.json
-│
-├── README.md
-└── package.json
-```
-
----
-
-# 🚀 Getting Started
-
-## Clone the Repository
-
-```bash
-git clone YOUR_REPOSITORY_LINK
-```
-
-```bash
-cd YOUR_PROJECT_NAME
-```
-
----
-
-## Install Dependencies
-
-### Backend
-
-```bash
-cd server
-npm install
-```
-
-### Frontend
-
-```bash
-cd client
-npm install
-```
-
----
-
-## Environment Variables
-
-Create a `.env` file inside the server directory.
-
-```env
-PORT=5000
-
-MONGO_URI=YOUR_MONGODB_URI
-
-JWT_SECRET=YOUR_SECRET_KEY
-
-CLOUDINARY_NAME=YOUR_NAME
-
-CLOUDINARY_API_KEY=YOUR_API_KEY
-
-CLOUDINARY_API_SECRET=YOUR_SECRET
-```
-
----
-
-## Run the Application
-
-### Backend
-
-```bash
-npm run dev
-```
-
-### Frontend
-
-```bash
-npm start
-```
-
-or
-
-```bash
-npm run dev
-```
-
-(depending on your frontend framework)
-
----
-
-# 📸 Screenshots
-
-Add screenshots here.
-
-```
-Home Page
-
-Watch Page
-
-Upload Page
-
-Profile Page
-
-Search Page
-
-Playlist Page
-```
-
----
-
 # 🎯 Learning Outcomes
 
 During this project, I gained practical experience in:
