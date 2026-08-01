@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "./app/slices/authSlice";
 
@@ -8,6 +8,7 @@ import Sidebar from "./components/common/Sidebar";
 import Spinner from "./components/common/Spinner";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
+import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -25,9 +26,11 @@ import Subscriptions from "./pages/Subscriptions";
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { initialized, isAuthenticated } = useSelector((state) => state.auth);
   const sidebarOpen = useSelector((state) => state.ui.sidebarOpen);
   const darkMode = useSelector((state) => state.ui.darkMode);
+  const hideShell = location.pathname === "/";
 
   // On every app load, check if user session still exists via cookie
   useEffect(() => {
@@ -39,15 +42,16 @@ function App() {
 
   return (
     <div className={`flex flex-col min-h-screen bg-white text-slate-900 ${darkMode ? "dark" : ""}`}>
-      <Navbar />
-      <div className="flex flex-1">
-        <Sidebar />
-        <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-0"}`}>
+      {!hideShell && <Navbar />}
+      <div className={`flex flex-1 ${hideShell ? "flex-col" : ""}`}>
+        {!hideShell && <Sidebar />}
+        <main className={`flex-1 transition-all duration-300 ${!hideShell && sidebarOpen ? "md:ml-64 ml-0" : "ml-0"}`}>
           <Routes>
             {/* Public routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/" />} />
-            <Route path="/register" element={!isAuthenticated ? <Register /> : <Navigate to="/" />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/home" />} />
+            <Route path="/register" element={!isAuthenticated ? <Register /> : <Navigate to="/home" />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/video/:videoId" element={<VideoPlayer />} />
             <Route path="/channel/:username" element={<Channel />} />

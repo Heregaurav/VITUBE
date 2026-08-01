@@ -10,7 +10,7 @@ function Sidebar() {
   if (!sidebarOpen) return null;
 
   const mainLinks = [
-    { name: "Home", icon: <Home size={20} />, path: "/" },
+    { name: "Home", icon: <Home size={20} />, path: "/home" },
   ];
 
   const userLinks = isAuthenticated ? [
@@ -32,7 +32,7 @@ function Sidebar() {
     }`;
 
   return (
-    <aside className="fixed left-0 top-[61px] bottom-0 w-64 bg-white border-r border-slate-200 p-4 transition-all duration-300 z-40 overflow-y-auto">
+    <aside className="fixed left-0 top-[61px] bottom-0 z-40 w-64 overflow-y-auto border-r border-slate-200 bg-white p-4 transition-all duration-300">
       {/* Main */}
       <div className="space-y-1">
         {mainLinks.map((link) => (

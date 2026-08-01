@@ -10,7 +10,7 @@ const getInitialDarkMode = () => {
 const uiSlice = createSlice({
   name: "ui",
   initialState: {
-    sidebarOpen: true,
+    sidebarOpen: false,
     darkMode: getInitialDarkMode(),
   },
   reducers: {

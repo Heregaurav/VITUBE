@@ -17,17 +17,17 @@ function Login() {
     const result = await dispatch(login(form));
     if (login.fulfilled.match(result)) {
       toast.success("Welcome back!");
-      navigate("/");
+      navigate("/home");
     } else {
       toast.error(result.payload || "Login failed");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50">
-      <div className="w-full max-w-md bg-white rounded-3xl p-10 shadow-2xl shadow-blue-900/5 mt-[-10vh]">
-        <h1 className="text-3xl font-black text-slate-900 mb-1 tracking-tighter">Sign In</h1>
-        <p className="text-slate-500 text-sm mb-10 font-medium">Continue your journey with Plavio</p>
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10 sm:px-6">
+      <div className="mt-0 w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl shadow-blue-900/5 sm:p-10">
+        <h1 className="mb-1 text-3xl font-black tracking-tighter text-slate-900">Sign In</h1>
+        <p className="mb-8 text-sm font-medium text-slate-500 sm:mb-10">Continue your journey with Plavio</p>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-1">
              <label className="text-xs font-bold text-slate-400 px-1 uppercase tracking-widest">Email Address</label>

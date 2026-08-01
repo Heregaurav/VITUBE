@@ -75,7 +75,7 @@ function Channel() {
   return (
     <div className="bg-white min-h-screen">
       {/* Cover Image */}
-      <div className="h-44 md:h-72 bg-slate-50 border-b border-slate-100 overflow-hidden relative">
+      <div className="h-36 sm:h-44 md:h-72 bg-slate-50 border-b border-slate-100 overflow-hidden relative">
         {channel.coverImage ? (
           <img src={channel.coverImage} className="w-full h-full object-cover" alt="Cover"/>
         ) : (
@@ -84,46 +84,48 @@ function Channel() {
       </div>
 
       {/* Channel Header */}
-      <div className="px-6 md:px-10 py-10 flex flex-col md:flex-row md:items-center justify-between gap-8 max-w-7xl mx-auto mt-[-40px] md:mt-[-60px] relative z-10">
-        <div className="flex items-start md:items-center gap-6 md:gap-10">
-          <img
-            src={channel.avatar}
-            className="w-24 h-24 md:w-36 md:h-36 rounded-full object-cover border-4 border-white ring-4 ring-blue-600/10 shadow-2xl"
-            alt="Avatar"
-          />
-          <div className="md:mt-8">
-            <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter">{channel.fullname}</h1>
-            <p className="text-blue-600 font-black text-sm uppercase tracking-widest mt-1.5 opacity-70">@{channel.username}</p>
-            <div className="flex items-center gap-3 text-slate-500 text-xs font-bold uppercase tracking-tight mt-3">
-              <span className="bg-slate-50 px-2 py-1 rounded-md border border-slate-100">{channel.subscribersCount} subscribers</span>
-              <span className="opacity-30">/</span>
-              <span className="bg-slate-50 px-2 py-1 rounded-md border border-slate-100">{channel.channelsSubscribedTo} subscriptions</span>
+      <div className="mx-auto mt-[-34px] max-w-7xl px-4 py-6 sm:px-6 sm:py-8 md:mt-[-60px] md:px-10 md:py-10 relative z-10">
+        <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center md:gap-10">
+            <img
+              src={channel.avatar}
+              className="w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 rounded-full object-cover border-4 border-white ring-4 ring-blue-600/10 shadow-2xl"
+              alt="Avatar"
+            />
+            <div className="sm:mt-2 md:mt-8">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tighter">{channel.fullname}</h1>
+              <p className="text-blue-600 font-black text-xs sm:text-sm uppercase tracking-widest mt-1.5 opacity-70">@{channel.username}</p>
+              <div className="mt-3 flex flex-wrap items-center gap-2 text-slate-500 text-[10px] sm:text-xs font-bold uppercase tracking-tight">
+                <span className="bg-slate-50 px-2 py-1 rounded-md border border-slate-100">{channel.subscribersCount} subscribers</span>
+                <span className="opacity-30">/</span>
+                <span className="bg-slate-50 px-2 py-1 rounded-md border border-slate-100">{channel.channelsSubscribedTo} subscriptions</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex gap-4 md:mt-8">
-          {!isOwner ? (
-            <button
-              onClick={handleSubscribe}
-              className={`px-10 py-3 rounded-full font-black text-xs uppercase tracking-widest transition-all transform active:scale-95 shadow-xl ${
-                subscribed ? "bg-slate-100 text-slate-500 hover:bg-slate-200" : "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-600/20"
-              }`}
-            >
-              {subscribed ? "Subscribed" : "Subscribe Channel"}
-            </button>
-          ) : (
-            <button
-              onClick={() => navigate("/settings")}
-              className="px-10 py-3 rounded-full font-black text-xs uppercase tracking-widest bg-slate-950 text-white hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/10"
-            >
-               Manage Profile
-            </button>
-          )}
+          <div className="flex w-full justify-start sm:w-auto md:mt-8 md:justify-end">
+            {!isOwner ? (
+              <button
+                onClick={handleSubscribe}
+                className={`w-full sm:w-auto px-4 sm:px-6 md:px-10 py-2.5 sm:py-3 rounded-full font-black text-[11px] uppercase tracking-widest transition-all transform active:scale-95 shadow-xl whitespace-nowrap ${
+                  subscribed ? "bg-slate-100 text-slate-500 hover:bg-slate-200" : "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-600/20"
+                }`}
+              >
+                {subscribed ? "Subbed" : "Subscribe"}
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate("/settings")}
+                className="w-full sm:w-auto px-4 sm:px-6 md:px-10 py-2.5 sm:py-3 rounded-full font-black text-[11px] uppercase tracking-widest bg-slate-950 text-white hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/10 whitespace-nowrap"
+              >
+                 Manage
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       {/* Tab Nav */}
-      <div className="px-6 md:px-10 border-b border-slate-100 flex gap-10 max-w-7xl mx-auto">
+      <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto border-b border-slate-100 px-4 sm:gap-6 sm:px-6 md:gap-10 md:px-10">
         {tabs.map((tab) => (
           <button
             key={tab}
@@ -144,7 +146,7 @@ function Channel() {
 
         {/* ── VIDEOS TAB ── */}
         {activeTab === "videos" && (
-          <div className="p-6 md:p-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
+          <div className="grid grid-cols-1 gap-x-4 gap-y-8 p-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 sm:p-6 md:grid-cols-3 md:p-10 lg:grid-cols-4">
             {videos.map((video) => (
               <VideoCard key={video._id} video={video} />
             ))}
@@ -159,9 +161,9 @@ function Channel() {
 
         {/* ── PLAYLISTS TAB ── */}
         {activeTab === "playlists" && (
-          <div className="p-6 md:p-10">
+          <div className="p-4 sm:p-6 md:p-10">
             {playlists.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {playlists.map((pl) => (
                   <Link
                     key={pl._id}
@@ -220,11 +222,11 @@ function Channel() {
 
         {/* ── INSIGHTS TAB ── */}
         {activeTab === "insights" && (
-          <div className="p-6 md:p-10">
+          <div className="p-4 sm:p-6 md:p-10">
             {isOwner ? (
               <div className="space-y-8">
                 {/* Stats cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-6">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="bg-blue-100 p-2 rounded-lg"><Video size={18} className="text-blue-600" /></div>
@@ -270,12 +272,12 @@ function Channel() {
                           <Link
                             key={v._id}
                             to={`/video/${v._id}`}
-                            className="flex items-center gap-4 px-5 py-4 hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-none"
+                            className="flex flex-col gap-3 px-4 py-4 hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-none sm:flex-row sm:items-center sm:gap-4 sm:px-5"
                           >
-                            <span className="text-lg font-black text-slate-300 w-6 text-center">{idx + 1}</span>
-                            <img src={v.thumbnail} className="w-20 h-12 rounded-lg object-cover flex-shrink-0" alt="" />
+                            <span className="text-lg font-black text-slate-300 w-6 text-center sm:text-left">{idx + 1}</span>
+                            <img src={v.thumbnail} className="w-full h-28 rounded-lg object-cover flex-shrink-0 sm:w-20 sm:h-12" alt="" />
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-bold text-slate-900 truncate">{v.title}</p>
+                              <p className="text-sm font-bold text-slate-900 line-clamp-2 sm:truncate">{v.title}</p>
                               <p className="text-xs text-slate-400 mt-0.5">{formatTimeAgo(v.createdAt)}</p>
                             </div>
                             <div className="flex items-center gap-4 text-xs font-bold text-slate-500 flex-shrink-0">
@@ -298,7 +300,7 @@ function Channel() {
 
         {/* ── ABOUT TAB ── */}
         {activeTab === "about" && (
-          <div className="p-6 md:p-10">
+          <div className="p-4 sm:p-6 md:p-10">
             <div className="max-w-2xl space-y-8">
               {/* Description */}
               <div>

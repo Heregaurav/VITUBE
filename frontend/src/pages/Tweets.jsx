@@ -173,20 +173,36 @@ function Tweets() {
   const activeTweets = activeTab === "mine" ? myTweets : feedTweets;
 
   return (
-    <div className="p-6 md:p-12 max-w-3xl mx-auto bg-white min-h-screen">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-black text-slate-900 tracking-tighter flex items-center gap-4">
-          <MessageCircle size={36} className="text-blue-600" />
-          Community
-        </h1>
-        <p className="text-slate-500 text-sm mt-2 font-medium">
-          Stay connected with your channels and share updates
-        </p>
-      </div>
+    <div className="min-h-screen bg-white px-4 py-6 sm:px-6 md:px-8 md:py-12">
+      <div className="mx-auto max-w-4xl">
+        {/* Header */}
+        <div className="mb-8 md:mb-12">
+          <h1 className="flex items-center gap-3 text-2xl font-black tracking-tighter text-slate-900 sm:gap-4 sm:text-3xl md:text-4xl">
+            <MessageCircle size={28} className="text-blue-600" />
+            Community
+          </h1>
+          <p className="mt-2 text-xs font-medium text-slate-500 sm:text-sm">Share your thoughts and connect with the community</p>
+        </div>
 
-      {/* Create Tweet */}
-      <form onSubmit={handleCreate} className="mb-8 bg-slate-50 border border-slate-200 rounded-3xl p-5">
+        {/* Tabs */}
+        <div className="mb-8 flex gap-2 overflow-x-auto rounded-2xl border border-slate-100 bg-slate-50 p-1.5 md:mb-10 md:w-fit">
+          {["feed", "mine"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`rounded-xl px-4 py-2 text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap sm:px-6 sm:py-2.5 ${
+                activeTab === tab
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                  : "text-slate-500 hover:bg-white hover:text-slate-900"
+              }`}
+            >
+              {tab === "feed" ? "Feed" : "My Posts"}
+            </button>
+          ))}
+        </div>
+
+        {/* Create Tweet */}
+        <form onSubmit={handleCreate} className="mb-8 rounded-3xl border border-slate-200 bg-slate-50 p-5 md:p-6">
         <div className="flex gap-4">
           {user?.avatar ? (
             <img
@@ -321,6 +337,7 @@ function Tweets() {
           )}
         </div>
       )}
+      </div>
     </div>
   );
 }

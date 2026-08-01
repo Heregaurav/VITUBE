@@ -193,7 +193,7 @@ function VideoPlayer() {
     try {
       await deleteVideo(videoId);
       toast.success("Video deleted!");
-      navigate("/");
+      navigate("/home");
     } catch {
       toast.error("Failed to delete video");
     }
@@ -406,6 +406,10 @@ function VideoPlayer() {
         @media (min-width: 1024px) {
           .hs-layout { flex-direction: row; }
         }
+        @media (max-width: 767px) {
+          .hs-player-page { padding: 12px; }
+          .hs-layout { gap: 20px; }
+        }
 
         /* ═══════════════════════════════════════════
            CUSTOM VIDEO PLAYER (always dark — overlays video)
@@ -572,9 +576,27 @@ function VideoPlayer() {
           padding-bottom: 22px;
           border-bottom: 1px solid #e2e8f0;
         }
+        @media (max-width: 767px) {
+          .hs-info-row {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 14px;
+          }
+        }
         .dark .hs-info-row { border-bottom-color: #334155; }
 
         .hs-channel-group { display: flex; align-items: center; gap: 14px; }
+        @media (max-width: 767px) {
+          .hs-channel-group {
+            flex-wrap: wrap;
+            align-items: flex-start;
+          }
+          .hs-subscribe-btn {
+            margin-left: 0;
+            margin-top: 8px;
+            width: fit-content;
+          }
+        }
 
         .hs-avatar {
           width: 46px; height: 46px;
@@ -627,6 +649,19 @@ function VideoPlayer() {
           display: flex; align-items: center; gap: 4px;
           background: #f8fafc; padding: 5px;
           border-radius: 50px; border: 1px solid #e2e8f0;
+        }
+        @media (max-width: 767px) {
+          .hs-actions-pill {
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            border-radius: 20px;
+            padding: 8px;
+          }
+          .hs-action-btn,
+          .hs-delete-btn {
+            padding-inline: 14px;
+          }
         }
         .dark .hs-actions-pill {
           background: rgba(255,255,255,0.04);
@@ -709,6 +744,20 @@ function VideoPlayer() {
         .hs-comments-icon { color: #3b82f6; opacity: 0.5; }
 
         .hs-comment-form { display: flex; gap: 14px; margin-bottom: 28px; }
+        @media (max-width: 767px) {
+          .hs-comment-form {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          .hs-comment-avatar {
+            width: 36px;
+            height: 36px;
+          }
+          .hs-comment-form-actions {
+            width: 100%;
+            justify-content: flex-end;
+          }
+        }
         .hs-comment-avatar {
           width: 44px; height: 44px;
           border-radius: 50%; object-fit: cover;
