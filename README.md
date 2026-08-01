@@ -1,6 +1,6 @@
-<<<<<<< HEAD
 
-#  VITUBE
+
+#  PLAVIO
 
 A full-stack **Video Streaming Platform** built as a course project that replicates the core functionality of modern video streaming services like YouTube. The platform allows users to upload, stream, discover, and interact with videos through an intuitive and responsive interface.
 
