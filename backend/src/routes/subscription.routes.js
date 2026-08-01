@@ -16,10 +16,10 @@ const router = Router();
 // ─────────────────────────────────────────────
 
 router.route("/c/:channelId")
-    .post(toggleSubscription)           // POST   /subscriptions/c/:channelId — subscribe or unsubscribe
-    .get(getUserChannelSubscribers);    // GET    /subscriptions/c/:channelId — get all subscribers of a channel
+    .post(verifyJWT, toggleSubscription)           // POST   /subscriptions/c/:channelId — subscribe or unsubscribe
+    .get(verifyJWT, getUserChannelSubscribers);    // GET    /subscriptions/c/:channelId — get all subscribers of a channel
 
 router.route("/u/:subscriberId")
-    .get(getSubscribedChannels);        // GET    /subscriptions/u/:subscriberId — get all channels a user subscribed to
+    .get(verifyJWT, getSubscribedChannels);        // GET    /subscriptions/u/:subscriberId — get all channels a user subscribed to
 
 export default router;
