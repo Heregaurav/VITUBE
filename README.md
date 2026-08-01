@@ -151,9 +151,4 @@ During this project, I gained practical experience in:
 
 ---
 
----
-
-##  If you like this project, consider giving it a star!
-=======
-
 
